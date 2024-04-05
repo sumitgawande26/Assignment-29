@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 29</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        .oswald-uniquifier {
+            font-family: "Oswald", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+        }
+
+        body {
+            text-align: center;
+            font-size: 48px;
+            background-color: #4158D0;
+            background-color: #74EBD5;
+            background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
+
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            height: 230px;
+            margin: 10%;
+            padding-top: 25px;
+        }
+
+        .date-box {
+            height: 20px;
+        }
+
+        .btn {
+            height: 28px;
+            width: 180px;
+            background: rgb(208, 66, 183);
+            background: linear-gradient(326deg, rgba(208, 66, 183, 1) 12%, rgba(253, 145, 29, 1) 83%, rgba(252, 69, 156, 1) 100%);
+            color: white;
+            font-weight: 800;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .result {
+            color: white;
+            font-weight: 800;
+            padding-top: 40px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 80%;
+                font-size: 40px;
+            }
+
+            .btn {
+                height: 25px;
+                width: 130px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body class="oswald-uniquifier">
+    <div class="container">
+        <label for="date">Date's to Calculate Difference📅</label>
+        <br>
+        <input type="date" id="date1" class="date-box">
+        <input type="date" id="date2" class="date-box">
+        <br>
+        <button onclick="calculate()" class="btn">Calculate</button>
+        <button type="button" class="btn" onclick="reset()">Reset</button>
+        <p id="result" class="result">
+
+        </p>
+    </div>
+
+    <script>
+        function calculate() {
+            const date1_input = document.getElementById('date1').value;
+            const date1 = new Date(date1_input);
+            const date2_input = document.getElementById('date2').value;
+            const date2 = new Date(date2_input);
+
+            let startDate = null;
+            let endDate = null;
+            let yearDiffr = null;
+            let monthDiffr = null;
+            let dateDiffr = null;
+
+            if (date1 > date2) {
+                startDate = date2;
+                endDate = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate() - 1,);
+                yearDiffr = endDate.getFullYear() - startDate.getFullYear();
+                monthDiffr = endDate.getMonth() - startDate.getMonth();
+                dateDiffr = endDate.getDate() - startDate.getDate();
+
+            }
+            else if (date1 < date2) {
+                startDate = date1;
+                endDate = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate() - 1,);
+                yearDiffr = endDate.getFullYear() - startDate.getFullYear();
+                monthDiffr = endDate.getMonth() - startDate.getMonth();
+                dateDiffr = endDate.getDate() - startDate.getDate();
+            }
+            document.getElementById('result').innerText = `${yearDiffr} Years : ${monthDiffr} Months : ${dateDiffr} Days `;
+
+        }
+
+        function reset() {
+            const input1 = document.getElementById("date1");
+            const input2 = document.getElementById("date2");
+            const result = document.getElementById("result");
+            input1.value = "";
+            input2.value = "";
+            result.innerText = "";
+        }
+
+    </script>
+</body>
+
+</html>
